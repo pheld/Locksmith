@@ -475,6 +475,11 @@ public extension ReadableSecureStorable where Self : GenericPasswordSecureStorab
     func readFromSecureStore() -> GenericPasswordSecureStorableResultType? {
         do {
             let result = try performSecureStorageAction(performReadRequestClosure, secureStoragePropertyDictionary: asReadableSecureStoragePropertyDictionary)
+
+	    if (result == nil) {
+	       return nil
+	    }
+
             return GenericPasswordResult(resultDictionary: result!)
         } catch {
             print(error)
